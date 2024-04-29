@@ -1,0 +1,71 @@
+<meta charset="UTF-8">
+
+<input/>
+<button>Em qual numero eu pensei?</button>
+
+<script>
+
+    function sorteia(){
+
+        return Math.round(Math.random() * 10);
+    
+    }
+
+    function sorteiaNumeros(quantidade) {
+        var numerosSecretos = [];
+        var sorteios = 0
+        while(sorteios < quantidade) {
+
+            var numeroAleatorio = sorteia()
+            if(numeroAleatorio != 0) {
+                var numeroIgual = false
+
+                for (var posicao = 0; posicao < numerosSecretos.length; posicao++){
+                    if(numerosSecretos[posicao] == numeroAleatorio) {
+                        numeroIgual = true;
+                        break;
+                    }
+                }
+
+                if(numeroIgual == false){
+                    numerosSecretos.push(numeroAleatorio);
+                    sorteios++
+                }
+            }
+            
+        }
+        return numerosSecretos;
+    }
+
+    
+
+    var numerosSecretos = sorteiaNumeros(5);
+
+    var chuteUsuario = document.querySelector("input");
+    chuteUsuario.focus();
+
+
+    var achou_resultado = false;
+    
+    function verifica() {
+        for (var posicao = 0; posicao < numerosSecretos.length; posicao++) {
+            if(chuteUsuario.value == numerosSecretos[posicao]){
+                alert("Você ACERTOU MIZERAVI!!!");
+                achou_resultado = true;
+                document.write("cabo o jogo :)");
+                break;
+            } 
+        }
+
+        if (achou_resultado == false){
+            alert("ERROU VAGABUNDO!!! tente de novo")
+        }
+
+        chuteUsuario.value = "";
+        chuteUsuario.focus();
+    }
+
+    var button = document.querySelector("button");
+    button.onclick = verifica;
+
+</script>
